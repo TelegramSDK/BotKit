@@ -5,7 +5,7 @@
 
 # BotKit
 
-Extension for the [telegramsdk/botapi] package.
+Extension for the [telegramsdk/botapi](https://github.com/TelegramSDK/BotAPI) package.
 This extension only allows users to preview the available methods from their IDE.
 
 ## 🛠 Installation
