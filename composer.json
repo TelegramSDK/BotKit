@@ -1,0 +1,45 @@
+{
+  "name": "telegramsdk/botkit",
+  "description": "TelegramSDK's BotKit",
+  "keywords": [
+    "telegram",
+    "api",
+    "bot",
+    "library",
+    "TelegramSDK",
+    "SDK",
+    "BotKit"
+  ],
+  "homepage": "https://github.com/TelegramSDK/BotKit",
+  "authors": [
+    {
+      "name": "Sebastiano Racca",
+      "email": "sebastiano@racca.me",
+      "role": "Developer",
+      "homepage": "https://github.com/SebaOfficial"
+    }
+  ],
+  "type": "library",
+  "autoload": {
+    "classmap": [
+      "src/"
+    ]
+  },
+  "scripts": {
+    "build": "php tools/generator.php",
+    "lint": "vendor/bin/php-cs-fixer fix ."
+  },
+  "require": {
+    "php": "^8.0",
+    "paquettg/php-html-parser": "^2.2",
+    "telegramsdk/botapi": "*"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.46"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  }
+}
