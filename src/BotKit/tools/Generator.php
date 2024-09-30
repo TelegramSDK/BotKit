@@ -99,7 +99,7 @@ class Generator
         EOD;
     }
 
-    private function getRequestParam($params)
+    private function getRequestParam(array $params)
     {
         $reqParams = [];
 
@@ -119,7 +119,7 @@ class Generator
         $variables = [];
 
         foreach ($params as $param) {
-            $variables[] = "\$" . $param['parameter'] . " = null";
+            $variables[] = "\$" . $param['parameter'] . ($param['required'] ? "" : " = null");
         }
 
         // Join all variables into a single string
@@ -129,6 +129,14 @@ class Generator
     private function getWritableMethod(array $method)
     {
         extract($method);
+        if (isset($params)) {
+            usort($params, function ($a, $b) {
+                if ($a['required'] === $b['required']) {
+                    return 0;
+                }
+                return $a['required'] ? -1 : 1;
+            });
+        }
         $description = implode(".\n * ", explode('. ', $description));
         $methodParams = $this->getMethodParamsString($params ?? []);
         $requestParams = $this->getRequestParam($params ?? []);
