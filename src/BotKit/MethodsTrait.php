@@ -49,9 +49,9 @@ trait MethodsTrait
      * Use this method to send text messages.
      * On success, the sent Message is returned.
      */
-    public function sendMessage($business_connection_id = null, $chat_id = null, $message_thread_id = null, $text = null, $parse_mode = null, $entities = null, $link_preview_options = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendMessage($chat_id, $text, $business_connection_id = null, $message_thread_id = null, $parse_mode = null, $entities = null, $link_preview_options = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendMessage(Helpers::array_filter(['business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'message_thread_id' => $message_thread_id, 'text' => $text, 'parse_mode' => $parse_mode, 'entities' => $entities, 'link_preview_options' => $link_preview_options, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendMessage(Helpers::array_filter(['chat_id' => $chat_id, 'text' => $text, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'parse_mode' => $parse_mode, 'entities' => $entities, 'link_preview_options' => $link_preview_options, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
@@ -59,9 +59,9 @@ trait MethodsTrait
      * Service messages and messages with protected content can't be forwarded.
      * On success, the sent Message is returned.
      */
-    public function forwardMessage($chat_id = null, $message_thread_id = null, $from_chat_id = null, $disable_notification = null, $protect_content = null, $message_id = null): TelegramResponse
+    public function forwardMessage($chat_id, $from_chat_id, $message_id, $message_thread_id = null, $disable_notification = null, $protect_content = null): TelegramResponse
     {
-        return parent::forwardMessage(Helpers::array_filter(['chat_id' => $chat_id, 'message_thread_id' => $message_thread_id, 'from_chat_id' => $from_chat_id, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_id' => $message_id]));
+        return parent::forwardMessage(Helpers::array_filter(['chat_id' => $chat_id, 'from_chat_id' => $from_chat_id, 'message_id' => $message_id, 'message_thread_id' => $message_thread_id, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content]));
     }
 
     /**
@@ -71,9 +71,9 @@ trait MethodsTrait
      * Album grouping is kept for forwarded messages.
      * On success, an array of MessageId of the sent messages is returned.
      */
-    public function forwardMessages($chat_id = null, $message_thread_id = null, $from_chat_id = null, $message_ids = null, $disable_notification = null, $protect_content = null): TelegramResponse
+    public function forwardMessages($chat_id, $from_chat_id, $message_ids, $message_thread_id = null, $disable_notification = null, $protect_content = null): TelegramResponse
     {
-        return parent::forwardMessages(Helpers::array_filter(['chat_id' => $chat_id, 'message_thread_id' => $message_thread_id, 'from_chat_id' => $from_chat_id, 'message_ids' => $message_ids, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content]));
+        return parent::forwardMessages(Helpers::array_filter(['chat_id' => $chat_id, 'from_chat_id' => $from_chat_id, 'message_ids' => $message_ids, 'message_thread_id' => $message_thread_id, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content]));
     }
 
     /**
@@ -83,9 +83,9 @@ trait MethodsTrait
      * The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message.
      * Returns the MessageId of the sent message on success.
      */
-    public function copyMessage($chat_id = null, $message_thread_id = null, $from_chat_id = null, $message_id = null, $caption = null, $parse_mode = null, $caption_entities = null, $show_caption_above_media = null, $disable_notification = null, $protect_content = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function copyMessage($chat_id, $from_chat_id, $message_id, $message_thread_id = null, $caption = null, $parse_mode = null, $caption_entities = null, $show_caption_above_media = null, $disable_notification = null, $protect_content = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::copyMessage(Helpers::array_filter(['chat_id' => $chat_id, 'message_thread_id' => $message_thread_id, 'from_chat_id' => $from_chat_id, 'message_id' => $message_id, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'show_caption_above_media' => $show_caption_above_media, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::copyMessage(Helpers::array_filter(['chat_id' => $chat_id, 'from_chat_id' => $from_chat_id, 'message_id' => $message_id, 'message_thread_id' => $message_thread_id, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'show_caption_above_media' => $show_caption_above_media, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
@@ -97,18 +97,18 @@ trait MethodsTrait
      * Album grouping is kept for copied messages.
      * On success, an array of MessageId of the sent messages is returned.
      */
-    public function copyMessages($chat_id = null, $message_thread_id = null, $from_chat_id = null, $message_ids = null, $disable_notification = null, $protect_content = null, $remove_caption = null): TelegramResponse
+    public function copyMessages($chat_id, $from_chat_id, $message_ids, $message_thread_id = null, $disable_notification = null, $protect_content = null, $remove_caption = null): TelegramResponse
     {
-        return parent::copyMessages(Helpers::array_filter(['chat_id' => $chat_id, 'message_thread_id' => $message_thread_id, 'from_chat_id' => $from_chat_id, 'message_ids' => $message_ids, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'remove_caption' => $remove_caption]));
+        return parent::copyMessages(Helpers::array_filter(['chat_id' => $chat_id, 'from_chat_id' => $from_chat_id, 'message_ids' => $message_ids, 'message_thread_id' => $message_thread_id, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'remove_caption' => $remove_caption]));
     }
 
     /**
      * Use this method to send photos.
      * On success, the sent Message is returned.
      */
-    public function sendPhoto($business_connection_id = null, $chat_id = null, $message_thread_id = null, $photo = null, $caption = null, $parse_mode = null, $caption_entities = null, $show_caption_above_media = null, $has_spoiler = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendPhoto($chat_id, $photo, $business_connection_id = null, $message_thread_id = null, $caption = null, $parse_mode = null, $caption_entities = null, $show_caption_above_media = null, $has_spoiler = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendPhoto(Helpers::array_filter(['business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'message_thread_id' => $message_thread_id, 'photo' => $photo, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'show_caption_above_media' => $show_caption_above_media, 'has_spoiler' => $has_spoiler, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendPhoto(Helpers::array_filter(['chat_id' => $chat_id, 'photo' => $photo, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'show_caption_above_media' => $show_caption_above_media, 'has_spoiler' => $has_spoiler, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
@@ -127,9 +127,9 @@ trait MethodsTrait
      * On success, the sent Message is returned.
      * Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
      */
-    public function sendDocument($business_connection_id = null, $chat_id = null, $message_thread_id = null, $document = null, $thumbnail = null, $caption = null, $parse_mode = null, $caption_entities = null, $disable_content_type_detection = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendDocument($chat_id, $document, $business_connection_id = null, $message_thread_id = null, $thumbnail = null, $caption = null, $parse_mode = null, $caption_entities = null, $disable_content_type_detection = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendDocument(Helpers::array_filter(['business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'message_thread_id' => $message_thread_id, 'document' => $document, 'thumbnail' => $thumbnail, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'disable_content_type_detection' => $disable_content_type_detection, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendDocument(Helpers::array_filter(['chat_id' => $chat_id, 'document' => $document, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'thumbnail' => $thumbnail, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'disable_content_type_detection' => $disable_content_type_detection, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
@@ -137,9 +137,9 @@ trait MethodsTrait
      * On success, the sent Message is returned.
      * Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
      */
-    public function sendVideo($business_connection_id = null, $chat_id = null, $message_thread_id = null, $video = null, $duration = null, $width = null, $height = null, $thumbnail = null, $caption = null, $parse_mode = null, $caption_entities = null, $show_caption_above_media = null, $has_spoiler = null, $supports_streaming = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendVideo($chat_id, $video, $business_connection_id = null, $message_thread_id = null, $duration = null, $width = null, $height = null, $thumbnail = null, $caption = null, $parse_mode = null, $caption_entities = null, $show_caption_above_media = null, $has_spoiler = null, $supports_streaming = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendVideo(Helpers::array_filter(['business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'message_thread_id' => $message_thread_id, 'video' => $video, 'duration' => $duration, 'width' => $width, 'height' => $height, 'thumbnail' => $thumbnail, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'show_caption_above_media' => $show_caption_above_media, 'has_spoiler' => $has_spoiler, 'supports_streaming' => $supports_streaming, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendVideo(Helpers::array_filter(['chat_id' => $chat_id, 'video' => $video, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'duration' => $duration, 'width' => $width, 'height' => $height, 'thumbnail' => $thumbnail, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'show_caption_above_media' => $show_caption_above_media, 'has_spoiler' => $has_spoiler, 'supports_streaming' => $supports_streaming, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
@@ -147,9 +147,9 @@ trait MethodsTrait
      * On success, the sent Message is returned.
      * Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
      */
-    public function sendAnimation($business_connection_id = null, $chat_id = null, $message_thread_id = null, $animation = null, $duration = null, $width = null, $height = null, $thumbnail = null, $caption = null, $parse_mode = null, $caption_entities = null, $show_caption_above_media = null, $has_spoiler = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendAnimation($chat_id, $animation, $business_connection_id = null, $message_thread_id = null, $duration = null, $width = null, $height = null, $thumbnail = null, $caption = null, $parse_mode = null, $caption_entities = null, $show_caption_above_media = null, $has_spoiler = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendAnimation(Helpers::array_filter(['business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'message_thread_id' => $message_thread_id, 'animation' => $animation, 'duration' => $duration, 'width' => $width, 'height' => $height, 'thumbnail' => $thumbnail, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'show_caption_above_media' => $show_caption_above_media, 'has_spoiler' => $has_spoiler, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendAnimation(Helpers::array_filter(['chat_id' => $chat_id, 'animation' => $animation, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'duration' => $duration, 'width' => $width, 'height' => $height, 'thumbnail' => $thumbnail, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'show_caption_above_media' => $show_caption_above_media, 'has_spoiler' => $has_spoiler, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
@@ -158,9 +158,9 @@ trait MethodsTrait
      * On success, the sent Message is returned.
      * Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
      */
-    public function sendVoice($business_connection_id = null, $chat_id = null, $message_thread_id = null, $voice = null, $caption = null, $parse_mode = null, $caption_entities = null, $duration = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendVoice($chat_id, $voice, $business_connection_id = null, $message_thread_id = null, $caption = null, $parse_mode = null, $caption_entities = null, $duration = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendVoice(Helpers::array_filter(['business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'message_thread_id' => $message_thread_id, 'voice' => $voice, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'duration' => $duration, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendVoice(Helpers::array_filter(['chat_id' => $chat_id, 'voice' => $voice, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'duration' => $duration, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
@@ -168,18 +168,18 @@ trait MethodsTrait
      * Use this method to send video messages.
      * On success, the sent Message is returned.
      */
-    public function sendVideoNote($business_connection_id = null, $chat_id = null, $message_thread_id = null, $video_note = null, $duration = null, $length = null, $thumbnail = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendVideoNote($chat_id, $video_note, $business_connection_id = null, $message_thread_id = null, $duration = null, $length = null, $thumbnail = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendVideoNote(Helpers::array_filter(['business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'message_thread_id' => $message_thread_id, 'video_note' => $video_note, 'duration' => $duration, 'length' => $length, 'thumbnail' => $thumbnail, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendVideoNote(Helpers::array_filter(['chat_id' => $chat_id, 'video_note' => $video_note, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'duration' => $duration, 'length' => $length, 'thumbnail' => $thumbnail, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
      * Use this method to send paid media.
      * On success, the sent Message is returned.
      */
-    public function sendPaidMedia($business_connection_id = null, $chat_id = null, $star_count = null, $media = null, $payload = null, $caption = null, $parse_mode = null, $caption_entities = null, $show_caption_above_media = null, $disable_notification = null, $protect_content = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendPaidMedia($chat_id, $star_count, $media, $business_connection_id = null, $payload = null, $caption = null, $parse_mode = null, $caption_entities = null, $show_caption_above_media = null, $disable_notification = null, $protect_content = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendPaidMedia(Helpers::array_filter(['business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'star_count' => $star_count, 'media' => $media, 'payload' => $payload, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'show_caption_above_media' => $show_caption_above_media, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendPaidMedia(Helpers::array_filter(['chat_id' => $chat_id, 'star_count' => $star_count, 'media' => $media, 'business_connection_id' => $business_connection_id, 'payload' => $payload, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'show_caption_above_media' => $show_caption_above_media, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
@@ -187,54 +187,54 @@ trait MethodsTrait
      * Documents and audio files can be only grouped in an album with messages of the same type.
      * On success, an array of Messages that were sent is returned.
      */
-    public function sendMediaGroup($business_connection_id = null, $chat_id = null, $message_thread_id = null, $media = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null): TelegramResponse
+    public function sendMediaGroup($chat_id, $media, $business_connection_id = null, $message_thread_id = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null): TelegramResponse
     {
-        return parent::sendMediaGroup(Helpers::array_filter(['business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'message_thread_id' => $message_thread_id, 'media' => $media, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters]));
+        return parent::sendMediaGroup(Helpers::array_filter(['chat_id' => $chat_id, 'media' => $media, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters]));
     }
 
     /**
      * Use this method to send point on the map.
      * On success, the sent Message is returned.
      */
-    public function sendLocation($business_connection_id = null, $chat_id = null, $message_thread_id = null, $latitude = null, $longitude = null, $horizontal_accuracy = null, $live_period = null, $heading = null, $proximity_alert_radius = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendLocation($chat_id, $latitude, $longitude, $business_connection_id = null, $message_thread_id = null, $horizontal_accuracy = null, $live_period = null, $heading = null, $proximity_alert_radius = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendLocation(Helpers::array_filter(['business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'message_thread_id' => $message_thread_id, 'latitude' => $latitude, 'longitude' => $longitude, 'horizontal_accuracy' => $horizontal_accuracy, 'live_period' => $live_period, 'heading' => $heading, 'proximity_alert_radius' => $proximity_alert_radius, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendLocation(Helpers::array_filter(['chat_id' => $chat_id, 'latitude' => $latitude, 'longitude' => $longitude, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'horizontal_accuracy' => $horizontal_accuracy, 'live_period' => $live_period, 'heading' => $heading, 'proximity_alert_radius' => $proximity_alert_radius, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
      * Use this method to send information about a venue.
      * On success, the sent Message is returned.
      */
-    public function sendVenue($business_connection_id = null, $chat_id = null, $message_thread_id = null, $latitude = null, $longitude = null, $title = null, $address = null, $foursquare_id = null, $foursquare_type = null, $google_place_id = null, $google_place_type = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendVenue($chat_id, $latitude, $longitude, $title, $address, $business_connection_id = null, $message_thread_id = null, $foursquare_id = null, $foursquare_type = null, $google_place_id = null, $google_place_type = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendVenue(Helpers::array_filter(['business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'message_thread_id' => $message_thread_id, 'latitude' => $latitude, 'longitude' => $longitude, 'title' => $title, 'address' => $address, 'foursquare_id' => $foursquare_id, 'foursquare_type' => $foursquare_type, 'google_place_id' => $google_place_id, 'google_place_type' => $google_place_type, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendVenue(Helpers::array_filter(['chat_id' => $chat_id, 'latitude' => $latitude, 'longitude' => $longitude, 'title' => $title, 'address' => $address, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'foursquare_id' => $foursquare_id, 'foursquare_type' => $foursquare_type, 'google_place_id' => $google_place_id, 'google_place_type' => $google_place_type, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
      * Use this method to send phone contacts.
      * On success, the sent Message is returned.
      */
-    public function sendContact($business_connection_id = null, $chat_id = null, $message_thread_id = null, $phone_number = null, $first_name = null, $last_name = null, $vcard = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendContact($chat_id, $phone_number, $first_name, $business_connection_id = null, $message_thread_id = null, $last_name = null, $vcard = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendContact(Helpers::array_filter(['business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'message_thread_id' => $message_thread_id, 'phone_number' => $phone_number, 'first_name' => $first_name, 'last_name' => $last_name, 'vcard' => $vcard, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendContact(Helpers::array_filter(['chat_id' => $chat_id, 'phone_number' => $phone_number, 'first_name' => $first_name, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'last_name' => $last_name, 'vcard' => $vcard, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
      * Use this method to send a native poll.
      * On success, the sent Message is returned.
      */
-    public function sendPoll($business_connection_id = null, $chat_id = null, $message_thread_id = null, $question = null, $question_parse_mode = null, $question_entities = null, $options = null, $is_anonymous = null, $type = null, $allows_multiple_answers = null, $correct_option_id = null, $explanation = null, $explanation_parse_mode = null, $explanation_entities = null, $open_period = null, $close_date = null, $is_closed = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendPoll($chat_id, $question, $options, $business_connection_id = null, $message_thread_id = null, $question_parse_mode = null, $question_entities = null, $is_anonymous = null, $type = null, $allows_multiple_answers = null, $correct_option_id = null, $explanation = null, $explanation_parse_mode = null, $explanation_entities = null, $open_period = null, $close_date = null, $is_closed = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendPoll(Helpers::array_filter(['business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'message_thread_id' => $message_thread_id, 'question' => $question, 'question_parse_mode' => $question_parse_mode, 'question_entities' => $question_entities, 'options' => $options, 'is_anonymous' => $is_anonymous, 'type' => $type, 'allows_multiple_answers' => $allows_multiple_answers, 'correct_option_id' => $correct_option_id, 'explanation' => $explanation, 'explanation_parse_mode' => $explanation_parse_mode, 'explanation_entities' => $explanation_entities, 'open_period' => $open_period, 'close_date' => $close_date, 'is_closed' => $is_closed, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendPoll(Helpers::array_filter(['chat_id' => $chat_id, 'question' => $question, 'options' => $options, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'question_parse_mode' => $question_parse_mode, 'question_entities' => $question_entities, 'is_anonymous' => $is_anonymous, 'type' => $type, 'allows_multiple_answers' => $allows_multiple_answers, 'correct_option_id' => $correct_option_id, 'explanation' => $explanation, 'explanation_parse_mode' => $explanation_parse_mode, 'explanation_entities' => $explanation_entities, 'open_period' => $open_period, 'close_date' => $close_date, 'is_closed' => $is_closed, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
      * Use this method to send an animated emoji that will display a random value.
      * On success, the sent Message is returned.
      */
-    public function sendDice($business_connection_id = null, $chat_id = null, $message_thread_id = null, $emoji = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendDice($chat_id, $business_connection_id = null, $message_thread_id = null, $emoji = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendDice(Helpers::array_filter(['business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'message_thread_id' => $message_thread_id, 'emoji' => $emoji, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendDice(Helpers::array_filter(['chat_id' => $chat_id, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'emoji' => $emoji, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
@@ -254,7 +254,7 @@ trait MethodsTrait
      * Bots can't use paid reactions.
      * Returns True on success.
      */
-    public function setMessageReaction($chat_id = null, $message_id = null, $reaction = null, $is_big = null): TelegramResponse
+    public function setMessageReaction($chat_id, $message_id, $reaction = null, $is_big = null): TelegramResponse
     {
         return parent::setMessageReaction(Helpers::array_filter(['chat_id' => $chat_id, 'message_id' => $message_id, 'reaction' => $reaction, 'is_big' => $is_big]));
     }
@@ -263,7 +263,7 @@ trait MethodsTrait
      * Use this method to get a list of profile pictures for a user.
      * Returns a UserProfilePhotos object.
      */
-    public function getUserProfilePhotos($user_id = null, $offset = null, $limit = null): TelegramResponse
+    public function getUserProfilePhotos($user_id, $offset = null, $limit = null): TelegramResponse
     {
         return parent::getUserProfilePhotos(Helpers::array_filter(['user_id' => $user_id, 'offset' => $offset, 'limit' => $limit]));
     }
@@ -276,7 +276,7 @@ trait MethodsTrait
      * It is guaranteed that the link will be valid for at least 1 hour.
      * When the link expires, a new one can be requested by calling getFile again.
      */
-    public function getFile($file_id = null): TelegramResponse
+    public function getFile($file_id): TelegramResponse
     {
         return parent::getFile(Helpers::array_filter(['file_id' => $file_id]));
     }
@@ -287,7 +287,7 @@ trait MethodsTrait
      * The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
      * Returns True on success.
      */
-    public function banChatMember($chat_id = null, $user_id = null, $until_date = null, $revoke_messages = null): TelegramResponse
+    public function banChatMember($chat_id, $user_id, $until_date = null, $revoke_messages = null): TelegramResponse
     {
         return parent::banChatMember(Helpers::array_filter(['chat_id' => $chat_id, 'user_id' => $user_id, 'until_date' => $until_date, 'revoke_messages' => $revoke_messages]));
     }
@@ -301,7 +301,7 @@ trait MethodsTrait
      * If you don't want this, use the parameter only_if_banned.
      * Returns True on success.
      */
-    public function unbanChatMember($chat_id = null, $user_id = null, $only_if_banned = null): TelegramResponse
+    public function unbanChatMember($chat_id, $user_id, $only_if_banned = null): TelegramResponse
     {
         return parent::unbanChatMember(Helpers::array_filter(['chat_id' => $chat_id, 'user_id' => $user_id, 'only_if_banned' => $only_if_banned]));
     }
@@ -312,7 +312,7 @@ trait MethodsTrait
      * Pass True for all permissions to lift restrictions from a user.
      * Returns True on success.
      */
-    public function restrictChatMember($chat_id = null, $user_id = null, $permissions = null, $use_independent_chat_permissions = null, $until_date = null): TelegramResponse
+    public function restrictChatMember($chat_id, $user_id, $permissions, $use_independent_chat_permissions = null, $until_date = null): TelegramResponse
     {
         return parent::restrictChatMember(Helpers::array_filter(['chat_id' => $chat_id, 'user_id' => $user_id, 'permissions' => $permissions, 'use_independent_chat_permissions' => $use_independent_chat_permissions, 'until_date' => $until_date]));
     }
@@ -323,7 +323,7 @@ trait MethodsTrait
      * Pass False for all boolean parameters to demote a user.
      * Returns True on success.
      */
-    public function promoteChatMember($chat_id = null, $user_id = null, $is_anonymous = null, $can_manage_chat = null, $can_delete_messages = null, $can_manage_video_chats = null, $can_restrict_members = null, $can_promote_members = null, $can_change_info = null, $can_invite_users = null, $can_post_stories = null, $can_edit_stories = null, $can_delete_stories = null, $can_post_messages = null, $can_edit_messages = null, $can_pin_messages = null, $can_manage_topics = null): TelegramResponse
+    public function promoteChatMember($chat_id, $user_id, $is_anonymous = null, $can_manage_chat = null, $can_delete_messages = null, $can_manage_video_chats = null, $can_restrict_members = null, $can_promote_members = null, $can_change_info = null, $can_invite_users = null, $can_post_stories = null, $can_edit_stories = null, $can_delete_stories = null, $can_post_messages = null, $can_edit_messages = null, $can_pin_messages = null, $can_manage_topics = null): TelegramResponse
     {
         return parent::promoteChatMember(Helpers::array_filter(['chat_id' => $chat_id, 'user_id' => $user_id, 'is_anonymous' => $is_anonymous, 'can_manage_chat' => $can_manage_chat, 'can_delete_messages' => $can_delete_messages, 'can_manage_video_chats' => $can_manage_video_chats, 'can_restrict_members' => $can_restrict_members, 'can_promote_members' => $can_promote_members, 'can_change_info' => $can_change_info, 'can_invite_users' => $can_invite_users, 'can_post_stories' => $can_post_stories, 'can_edit_stories' => $can_edit_stories, 'can_delete_stories' => $can_delete_stories, 'can_post_messages' => $can_post_messages, 'can_edit_messages' => $can_edit_messages, 'can_pin_messages' => $can_pin_messages, 'can_manage_topics' => $can_manage_topics]));
     }
@@ -332,7 +332,7 @@ trait MethodsTrait
      * Use this method to set a custom title for an administrator in a supergroup promoted by the bot.
      * Returns True on success.
      */
-    public function setChatAdministratorCustomTitle($chat_id = null, $user_id = null, $custom_title = null): TelegramResponse
+    public function setChatAdministratorCustomTitle($chat_id, $user_id, $custom_title): TelegramResponse
     {
         return parent::setChatAdministratorCustomTitle(Helpers::array_filter(['chat_id' => $chat_id, 'user_id' => $user_id, 'custom_title' => $custom_title]));
     }
@@ -343,7 +343,7 @@ trait MethodsTrait
      * The bot must be an administrator in the supergroup or channel for this to work and must have the appropriate administrator rights.
      * Returns True on success.
      */
-    public function banChatSenderChat($chat_id = null, $sender_chat_id = null): TelegramResponse
+    public function banChatSenderChat($chat_id, $sender_chat_id): TelegramResponse
     {
         return parent::banChatSenderChat(Helpers::array_filter(['chat_id' => $chat_id, 'sender_chat_id' => $sender_chat_id]));
     }
@@ -353,7 +353,7 @@ trait MethodsTrait
      * The bot must be an administrator for this to work and must have the appropriate administrator rights.
      * Returns True on success.
      */
-    public function unbanChatSenderChat($chat_id = null, $sender_chat_id = null): TelegramResponse
+    public function unbanChatSenderChat($chat_id, $sender_chat_id): TelegramResponse
     {
         return parent::unbanChatSenderChat(Helpers::array_filter(['chat_id' => $chat_id, 'sender_chat_id' => $sender_chat_id]));
     }
@@ -363,7 +363,7 @@ trait MethodsTrait
      * The bot must be an administrator in the group or a supergroup for this to work and must have the can_restrict_members administrator rights.
      * Returns True on success.
      */
-    public function setChatPermissions($chat_id = null, $permissions = null, $use_independent_chat_permissions = null): TelegramResponse
+    public function setChatPermissions($chat_id, $permissions, $use_independent_chat_permissions = null): TelegramResponse
     {
         return parent::setChatPermissions(Helpers::array_filter(['chat_id' => $chat_id, 'permissions' => $permissions, 'use_independent_chat_permissions' => $use_independent_chat_permissions]));
     }
@@ -373,7 +373,7 @@ trait MethodsTrait
      * The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
      * Returns the new invite link as String on success.
      */
-    public function exportChatInviteLink($chat_id = null): TelegramResponse
+    public function exportChatInviteLink($chat_id): TelegramResponse
     {
         return parent::exportChatInviteLink(Helpers::array_filter(['chat_id' => $chat_id]));
     }
@@ -384,7 +384,7 @@ trait MethodsTrait
      * The link can be revoked using the method revokeChatInviteLink.
      * Returns the new invite link as ChatInviteLink object.
      */
-    public function createChatInviteLink($chat_id = null, $name = null, $expire_date = null, $member_limit = null, $creates_join_request = null): TelegramResponse
+    public function createChatInviteLink($chat_id, $name = null, $expire_date = null, $member_limit = null, $creates_join_request = null): TelegramResponse
     {
         return parent::createChatInviteLink(Helpers::array_filter(['chat_id' => $chat_id, 'name' => $name, 'expire_date' => $expire_date, 'member_limit' => $member_limit, 'creates_join_request' => $creates_join_request]));
     }
@@ -394,7 +394,7 @@ trait MethodsTrait
      * The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
      * Returns the edited invite link as a ChatInviteLink object.
      */
-    public function editChatInviteLink($chat_id = null, $invite_link = null, $name = null, $expire_date = null, $member_limit = null, $creates_join_request = null): TelegramResponse
+    public function editChatInviteLink($chat_id, $invite_link, $name = null, $expire_date = null, $member_limit = null, $creates_join_request = null): TelegramResponse
     {
         return parent::editChatInviteLink(Helpers::array_filter(['chat_id' => $chat_id, 'invite_link' => $invite_link, 'name' => $name, 'expire_date' => $expire_date, 'member_limit' => $member_limit, 'creates_join_request' => $creates_join_request]));
     }
@@ -405,9 +405,9 @@ trait MethodsTrait
      * The link can be edited using the method editChatSubscriptionInviteLink or revoked using the method revokeChatInviteLink.
      * Returns the new invite link as a ChatInviteLink object.
      */
-    public function createChatSubscriptionInviteLink($chat_id = null, $name = null, $subscription_period = null, $subscription_price = null): TelegramResponse
+    public function createChatSubscriptionInviteLink($chat_id, $subscription_period, $subscription_price, $name = null): TelegramResponse
     {
-        return parent::createChatSubscriptionInviteLink(Helpers::array_filter(['chat_id' => $chat_id, 'name' => $name, 'subscription_period' => $subscription_period, 'subscription_price' => $subscription_price]));
+        return parent::createChatSubscriptionInviteLink(Helpers::array_filter(['chat_id' => $chat_id, 'subscription_period' => $subscription_period, 'subscription_price' => $subscription_price, 'name' => $name]));
     }
 
     /**
@@ -415,7 +415,7 @@ trait MethodsTrait
      * The bot must have the can_invite_users administrator rights.
      * Returns the edited invite link as a ChatInviteLink object.
      */
-    public function editChatSubscriptionInviteLink($chat_id = null, $invite_link = null, $name = null): TelegramResponse
+    public function editChatSubscriptionInviteLink($chat_id, $invite_link, $name = null): TelegramResponse
     {
         return parent::editChatSubscriptionInviteLink(Helpers::array_filter(['chat_id' => $chat_id, 'invite_link' => $invite_link, 'name' => $name]));
     }
@@ -426,7 +426,7 @@ trait MethodsTrait
      * The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
      * Returns the revoked invite link as ChatInviteLink object.
      */
-    public function revokeChatInviteLink($chat_id = null, $invite_link = null): TelegramResponse
+    public function revokeChatInviteLink($chat_id, $invite_link): TelegramResponse
     {
         return parent::revokeChatInviteLink(Helpers::array_filter(['chat_id' => $chat_id, 'invite_link' => $invite_link]));
     }
@@ -436,7 +436,7 @@ trait MethodsTrait
      * The bot must be an administrator in the chat for this to work and must have the can_invite_users administrator right.
      * Returns True on success.
      */
-    public function approveChatJoinRequest($chat_id = null, $user_id = null): TelegramResponse
+    public function approveChatJoinRequest($chat_id, $user_id): TelegramResponse
     {
         return parent::approveChatJoinRequest(Helpers::array_filter(['chat_id' => $chat_id, 'user_id' => $user_id]));
     }
@@ -446,7 +446,7 @@ trait MethodsTrait
      * The bot must be an administrator in the chat for this to work and must have the can_invite_users administrator right.
      * Returns True on success.
      */
-    public function declineChatJoinRequest($chat_id = null, $user_id = null): TelegramResponse
+    public function declineChatJoinRequest($chat_id, $user_id): TelegramResponse
     {
         return parent::declineChatJoinRequest(Helpers::array_filter(['chat_id' => $chat_id, 'user_id' => $user_id]));
     }
@@ -457,7 +457,7 @@ trait MethodsTrait
      * The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
      * Returns True on success.
      */
-    public function setChatPhoto($chat_id = null, $photo = null): TelegramResponse
+    public function setChatPhoto($chat_id, $photo): TelegramResponse
     {
         return parent::setChatPhoto(Helpers::array_filter(['chat_id' => $chat_id, 'photo' => $photo]));
     }
@@ -468,7 +468,7 @@ trait MethodsTrait
      * The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
      * Returns True on success.
      */
-    public function deleteChatPhoto($chat_id = null): TelegramResponse
+    public function deleteChatPhoto($chat_id): TelegramResponse
     {
         return parent::deleteChatPhoto(Helpers::array_filter(['chat_id' => $chat_id]));
     }
@@ -479,7 +479,7 @@ trait MethodsTrait
      * The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
      * Returns True on success.
      */
-    public function setChatTitle($chat_id = null, $title = null): TelegramResponse
+    public function setChatTitle($chat_id, $title): TelegramResponse
     {
         return parent::setChatTitle(Helpers::array_filter(['chat_id' => $chat_id, 'title' => $title]));
     }
@@ -489,7 +489,7 @@ trait MethodsTrait
      * The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
      * Returns True on success.
      */
-    public function setChatDescription($chat_id = null, $description = null): TelegramResponse
+    public function setChatDescription($chat_id, $description = null): TelegramResponse
     {
         return parent::setChatDescription(Helpers::array_filter(['chat_id' => $chat_id, 'description' => $description]));
     }
@@ -499,9 +499,9 @@ trait MethodsTrait
      * If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel.
      * Returns True on success.
      */
-    public function pinChatMessage($business_connection_id = null, $chat_id = null, $message_id = null, $disable_notification = null): TelegramResponse
+    public function pinChatMessage($chat_id, $message_id, $business_connection_id = null, $disable_notification = null): TelegramResponse
     {
-        return parent::pinChatMessage(Helpers::array_filter(['business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'message_id' => $message_id, 'disable_notification' => $disable_notification]));
+        return parent::pinChatMessage(Helpers::array_filter(['chat_id' => $chat_id, 'message_id' => $message_id, 'business_connection_id' => $business_connection_id, 'disable_notification' => $disable_notification]));
     }
 
     /**
@@ -509,9 +509,9 @@ trait MethodsTrait
      * If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel.
      * Returns True on success.
      */
-    public function unpinChatMessage($business_connection_id = null, $chat_id = null, $message_id = null): TelegramResponse
+    public function unpinChatMessage($chat_id, $business_connection_id = null, $message_id = null): TelegramResponse
     {
-        return parent::unpinChatMessage(Helpers::array_filter(['business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'message_id' => $message_id]));
+        return parent::unpinChatMessage(Helpers::array_filter(['chat_id' => $chat_id, 'business_connection_id' => $business_connection_id, 'message_id' => $message_id]));
     }
 
     /**
@@ -519,7 +519,7 @@ trait MethodsTrait
      * If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel.
      * Returns True on success.
      */
-    public function unpinAllChatMessages($chat_id = null): TelegramResponse
+    public function unpinAllChatMessages($chat_id): TelegramResponse
     {
         return parent::unpinAllChatMessages(Helpers::array_filter(['chat_id' => $chat_id]));
     }
@@ -528,7 +528,7 @@ trait MethodsTrait
      * Use this method for your bot to leave a group, supergroup or channel.
      * Returns True on success.
      */
-    public function leaveChat($chat_id = null): TelegramResponse
+    public function leaveChat($chat_id): TelegramResponse
     {
         return parent::leaveChat(Helpers::array_filter(['chat_id' => $chat_id]));
     }
@@ -537,7 +537,7 @@ trait MethodsTrait
      * Use this method to get up-to-date information about the chat.
      * Returns a ChatFullInfo object on success.
      */
-    public function getChat($chat_id = null): TelegramResponse
+    public function getChat($chat_id): TelegramResponse
     {
         return parent::getChat(Helpers::array_filter(['chat_id' => $chat_id]));
     }
@@ -546,7 +546,7 @@ trait MethodsTrait
      * Use this method to get a list of administrators in a chat, which aren't bots.
      * Returns an Array of ChatMember objects.
      */
-    public function getChatAdministrators($chat_id = null): TelegramResponse
+    public function getChatAdministrators($chat_id): TelegramResponse
     {
         return parent::getChatAdministrators(Helpers::array_filter(['chat_id' => $chat_id]));
     }
@@ -555,7 +555,7 @@ trait MethodsTrait
      * Use this method to get the number of members in a chat.
      * Returns Int on success.
      */
-    public function getChatMemberCount($chat_id = null): TelegramResponse
+    public function getChatMemberCount($chat_id): TelegramResponse
     {
         return parent::getChatMemberCount(Helpers::array_filter(['chat_id' => $chat_id]));
     }
@@ -565,7 +565,7 @@ trait MethodsTrait
      * The method is only guaranteed to work for other users if the bot is an administrator in the chat.
      * Returns a ChatMember object on success.
      */
-    public function getChatMember($chat_id = null, $user_id = null): TelegramResponse
+    public function getChatMember($chat_id, $user_id): TelegramResponse
     {
         return parent::getChatMember(Helpers::array_filter(['chat_id' => $chat_id, 'user_id' => $user_id]));
     }
@@ -576,7 +576,7 @@ trait MethodsTrait
      * Use the field can_set_sticker_set optionally returned in getChat requests to check if the bot can use this method.
      * Returns True on success.
      */
-    public function setChatStickerSet($chat_id = null, $sticker_set_name = null): TelegramResponse
+    public function setChatStickerSet($chat_id, $sticker_set_name): TelegramResponse
     {
         return parent::setChatStickerSet(Helpers::array_filter(['chat_id' => $chat_id, 'sticker_set_name' => $sticker_set_name]));
     }
@@ -587,7 +587,7 @@ trait MethodsTrait
      * Use the field can_set_sticker_set optionally returned in getChat requests to check if the bot can use this method.
      * Returns True on success.
      */
-    public function deleteChatStickerSet($chat_id = null): TelegramResponse
+    public function deleteChatStickerSet($chat_id): TelegramResponse
     {
         return parent::deleteChatStickerSet(Helpers::array_filter(['chat_id' => $chat_id]));
     }
@@ -607,7 +607,7 @@ trait MethodsTrait
      * The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights.
      * Returns information about the created topic as a ForumTopic object.
      */
-    public function createForumTopic($chat_id = null, $name = null, $icon_color = null, $icon_custom_emoji_id = null): TelegramResponse
+    public function createForumTopic($chat_id, $name, $icon_color = null, $icon_custom_emoji_id = null): TelegramResponse
     {
         return parent::createForumTopic(Helpers::array_filter(['chat_id' => $chat_id, 'name' => $name, 'icon_color' => $icon_color, 'icon_custom_emoji_id' => $icon_custom_emoji_id]));
     }
@@ -617,7 +617,7 @@ trait MethodsTrait
      * The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic.
      * Returns True on success.
      */
-    public function editForumTopic($chat_id = null, $message_thread_id = null, $name = null, $icon_custom_emoji_id = null): TelegramResponse
+    public function editForumTopic($chat_id, $message_thread_id, $name = null, $icon_custom_emoji_id = null): TelegramResponse
     {
         return parent::editForumTopic(Helpers::array_filter(['chat_id' => $chat_id, 'message_thread_id' => $message_thread_id, 'name' => $name, 'icon_custom_emoji_id' => $icon_custom_emoji_id]));
     }
@@ -627,7 +627,7 @@ trait MethodsTrait
      * The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic.
      * Returns True on success.
      */
-    public function closeForumTopic($chat_id = null, $message_thread_id = null): TelegramResponse
+    public function closeForumTopic($chat_id, $message_thread_id): TelegramResponse
     {
         return parent::closeForumTopic(Helpers::array_filter(['chat_id' => $chat_id, 'message_thread_id' => $message_thread_id]));
     }
@@ -637,7 +637,7 @@ trait MethodsTrait
      * The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic.
      * Returns True on success.
      */
-    public function reopenForumTopic($chat_id = null, $message_thread_id = null): TelegramResponse
+    public function reopenForumTopic($chat_id, $message_thread_id): TelegramResponse
     {
         return parent::reopenForumTopic(Helpers::array_filter(['chat_id' => $chat_id, 'message_thread_id' => $message_thread_id]));
     }
@@ -647,7 +647,7 @@ trait MethodsTrait
      * The bot must be an administrator in the chat for this to work and must have the can_delete_messages administrator rights.
      * Returns True on success.
      */
-    public function deleteForumTopic($chat_id = null, $message_thread_id = null): TelegramResponse
+    public function deleteForumTopic($chat_id, $message_thread_id): TelegramResponse
     {
         return parent::deleteForumTopic(Helpers::array_filter(['chat_id' => $chat_id, 'message_thread_id' => $message_thread_id]));
     }
@@ -657,7 +657,7 @@ trait MethodsTrait
      * The bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup.
      * Returns True on success.
      */
-    public function unpinAllForumTopicMessages($chat_id = null, $message_thread_id = null): TelegramResponse
+    public function unpinAllForumTopicMessages($chat_id, $message_thread_id): TelegramResponse
     {
         return parent::unpinAllForumTopicMessages(Helpers::array_filter(['chat_id' => $chat_id, 'message_thread_id' => $message_thread_id]));
     }
@@ -667,7 +667,7 @@ trait MethodsTrait
      * The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights.
      * Returns True on success.
      */
-    public function editGeneralForumTopic($chat_id = null, $name = null): TelegramResponse
+    public function editGeneralForumTopic($chat_id, $name): TelegramResponse
     {
         return parent::editGeneralForumTopic(Helpers::array_filter(['chat_id' => $chat_id, 'name' => $name]));
     }
@@ -677,7 +677,7 @@ trait MethodsTrait
      * The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights.
      * Returns True on success.
      */
-    public function closeGeneralForumTopic($chat_id = null): TelegramResponse
+    public function closeGeneralForumTopic($chat_id): TelegramResponse
     {
         return parent::closeGeneralForumTopic(Helpers::array_filter(['chat_id' => $chat_id]));
     }
@@ -688,7 +688,7 @@ trait MethodsTrait
      * The topic will be automatically unhidden if it was hidden.
      * Returns True on success.
      */
-    public function reopenGeneralForumTopic($chat_id = null): TelegramResponse
+    public function reopenGeneralForumTopic($chat_id): TelegramResponse
     {
         return parent::reopenGeneralForumTopic(Helpers::array_filter(['chat_id' => $chat_id]));
     }
@@ -699,7 +699,7 @@ trait MethodsTrait
      * The topic will be automatically closed if it was open.
      * Returns True on success.
      */
-    public function hideGeneralForumTopic($chat_id = null): TelegramResponse
+    public function hideGeneralForumTopic($chat_id): TelegramResponse
     {
         return parent::hideGeneralForumTopic(Helpers::array_filter(['chat_id' => $chat_id]));
     }
@@ -709,7 +709,7 @@ trait MethodsTrait
      * The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights.
      * Returns True on success.
      */
-    public function unhideGeneralForumTopic($chat_id = null): TelegramResponse
+    public function unhideGeneralForumTopic($chat_id): TelegramResponse
     {
         return parent::unhideGeneralForumTopic(Helpers::array_filter(['chat_id' => $chat_id]));
     }
@@ -719,7 +719,7 @@ trait MethodsTrait
      * The bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup.
      * Returns True on success.
      */
-    public function unpinAllGeneralForumTopicMessages($chat_id = null): TelegramResponse
+    public function unpinAllGeneralForumTopicMessages($chat_id): TelegramResponse
     {
         return parent::unpinAllGeneralForumTopicMessages(Helpers::array_filter(['chat_id' => $chat_id]));
     }
@@ -739,7 +739,7 @@ trait MethodsTrait
      * Requires administrator rights in the chat.
      * Returns a UserChatBoosts object.
      */
-    public function getUserChatBoosts($chat_id = null, $user_id = null): TelegramResponse
+    public function getUserChatBoosts($chat_id, $user_id): TelegramResponse
     {
         return parent::getUserChatBoosts(Helpers::array_filter(['chat_id' => $chat_id, 'user_id' => $user_id]));
     }
@@ -748,7 +748,7 @@ trait MethodsTrait
      * Use this method to get information about the connection of the bot with a business account.
      * Returns a BusinessConnection object on success.
      */
-    public function getBusinessConnection($business_connection_id = null): TelegramResponse
+    public function getBusinessConnection($business_connection_id): TelegramResponse
     {
         return parent::getBusinessConnection(Helpers::array_filter(['business_connection_id' => $business_connection_id]));
     }
@@ -758,7 +758,7 @@ trait MethodsTrait
      * See this manual for more details about bot commands.
      * Returns True on success.
      */
-    public function setMyCommands($commands = null, $scope = null, $language_code = null): TelegramResponse
+    public function setMyCommands($commands, $scope = null, $language_code = null): TelegramResponse
     {
         return parent::setMyCommands(Helpers::array_filter(['commands' => $commands, 'scope' => $scope, 'language_code' => $language_code]));
     }
@@ -879,9 +879,9 @@ trait MethodsTrait
      * On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
      * Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      */
-    public function editMessageText($business_connection_id = null, $chat_id = null, $message_id = null, $inline_message_id = null, $text = null, $parse_mode = null, $entities = null, $link_preview_options = null, $reply_markup = null): TelegramResponse
+    public function editMessageText($text, $business_connection_id = null, $chat_id = null, $message_id = null, $inline_message_id = null, $parse_mode = null, $entities = null, $link_preview_options = null, $reply_markup = null): TelegramResponse
     {
-        return parent::editMessageText(Helpers::array_filter(['business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'message_id' => $message_id, 'inline_message_id' => $inline_message_id, 'text' => $text, 'parse_mode' => $parse_mode, 'entities' => $entities, 'link_preview_options' => $link_preview_options, 'reply_markup' => $reply_markup]));
+        return parent::editMessageText(Helpers::array_filter(['text' => $text, 'business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'message_id' => $message_id, 'inline_message_id' => $inline_message_id, 'parse_mode' => $parse_mode, 'entities' => $entities, 'link_preview_options' => $link_preview_options, 'reply_markup' => $reply_markup]));
     }
 
     /**
@@ -901,9 +901,9 @@ trait MethodsTrait
      * On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
      * Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      */
-    public function editMessageMedia($business_connection_id = null, $chat_id = null, $message_id = null, $inline_message_id = null, $media = null, $reply_markup = null): TelegramResponse
+    public function editMessageMedia($media, $business_connection_id = null, $chat_id = null, $message_id = null, $inline_message_id = null, $reply_markup = null): TelegramResponse
     {
-        return parent::editMessageMedia(Helpers::array_filter(['business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'message_id' => $message_id, 'inline_message_id' => $inline_message_id, 'media' => $media, 'reply_markup' => $reply_markup]));
+        return parent::editMessageMedia(Helpers::array_filter(['media' => $media, 'business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'message_id' => $message_id, 'inline_message_id' => $inline_message_id, 'reply_markup' => $reply_markup]));
     }
 
     /**
@@ -911,9 +911,9 @@ trait MethodsTrait
      * A location can be edited until its live_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation.
      * On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
      */
-    public function editMessageLiveLocation($business_connection_id = null, $chat_id = null, $message_id = null, $inline_message_id = null, $latitude = null, $longitude = null, $live_period = null, $horizontal_accuracy = null, $heading = null, $proximity_alert_radius = null, $reply_markup = null): TelegramResponse
+    public function editMessageLiveLocation($latitude, $longitude, $business_connection_id = null, $chat_id = null, $message_id = null, $inline_message_id = null, $live_period = null, $horizontal_accuracy = null, $heading = null, $proximity_alert_radius = null, $reply_markup = null): TelegramResponse
     {
-        return parent::editMessageLiveLocation(Helpers::array_filter(['business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'message_id' => $message_id, 'inline_message_id' => $inline_message_id, 'latitude' => $latitude, 'longitude' => $longitude, 'live_period' => $live_period, 'horizontal_accuracy' => $horizontal_accuracy, 'heading' => $heading, 'proximity_alert_radius' => $proximity_alert_radius, 'reply_markup' => $reply_markup]));
+        return parent::editMessageLiveLocation(Helpers::array_filter(['latitude' => $latitude, 'longitude' => $longitude, 'business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'message_id' => $message_id, 'inline_message_id' => $inline_message_id, 'live_period' => $live_period, 'horizontal_accuracy' => $horizontal_accuracy, 'heading' => $heading, 'proximity_alert_radius' => $proximity_alert_radius, 'reply_markup' => $reply_markup]));
     }
 
     /**
@@ -939,15 +939,15 @@ trait MethodsTrait
      * Use this method to stop a poll which was sent by the bot.
      * On success, the stopped Poll is returned.
      */
-    public function stopPoll($business_connection_id = null, $chat_id = null, $message_id = null, $reply_markup = null): TelegramResponse
+    public function stopPoll($chat_id, $message_id, $business_connection_id = null, $reply_markup = null): TelegramResponse
     {
-        return parent::stopPoll(Helpers::array_filter(['business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'message_id' => $message_id, 'reply_markup' => $reply_markup]));
+        return parent::stopPoll(Helpers::array_filter(['chat_id' => $chat_id, 'message_id' => $message_id, 'business_connection_id' => $business_connection_id, 'reply_markup' => $reply_markup]));
     }
 
     /**
      * Use this method to delete a message, including service messages, with the following limitations:- A message can only be deleted if it was sent less than 48 hours ago.- Service messages about a supergroup, channel, or forum topic creation can't be deleted.- A dice message in a private chat can only be deleted if it was sent more than 24 hours ago.- Bots can delete outgoing messages in private chats, groups, and supergroups.- Bots can delete incoming messages in private chats.- Bots granted can_post_messages permissions can delete outgoing messages in channels.- If the bot is an administrator of a group, it can delete any message there.- If the bot has can_delete_messages permission in a supergroup or a channel, it can delete any message there.Returns True on success.
      */
-    public function deleteMessage($chat_id = null, $message_id = null): TelegramResponse
+    public function deleteMessage($chat_id, $message_id): TelegramResponse
     {
         return parent::deleteMessage(Helpers::array_filter(['chat_id' => $chat_id, 'message_id' => $message_id]));
     }
@@ -957,7 +957,7 @@ trait MethodsTrait
      * If some of the specified messages can't be found, they are skipped.
      * Returns True on success.
      */
-    public function deleteMessages($chat_id = null, $message_ids = null): TelegramResponse
+    public function deleteMessages($chat_id, $message_ids): TelegramResponse
     {
         return parent::deleteMessages(Helpers::array_filter(['chat_id' => $chat_id, 'message_ids' => $message_ids]));
     }
@@ -966,16 +966,16 @@ trait MethodsTrait
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers.
      * On success, the sent Message is returned.
      */
-    public function sendSticker($business_connection_id = null, $chat_id = null, $message_thread_id = null, $sticker = null, $emoji = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendSticker($chat_id, $sticker, $business_connection_id = null, $message_thread_id = null, $emoji = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendSticker(Helpers::array_filter(['business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'message_thread_id' => $message_thread_id, 'sticker' => $sticker, 'emoji' => $emoji, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendSticker(Helpers::array_filter(['chat_id' => $chat_id, 'sticker' => $sticker, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'emoji' => $emoji, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
      * Use this method to get a sticker set.
      * On success, a StickerSet object is returned.
      */
-    public function getStickerSet($name = null): TelegramResponse
+    public function getStickerSet($name): TelegramResponse
     {
         return parent::getStickerSet(Helpers::array_filter(['name' => $name]));
     }
@@ -984,7 +984,7 @@ trait MethodsTrait
      * Use this method to get information about custom emoji stickers by their identifiers.
      * Returns an Array of Sticker objects.
      */
-    public function getCustomEmojiStickers($custom_emoji_ids = null): TelegramResponse
+    public function getCustomEmojiStickers($custom_emoji_ids): TelegramResponse
     {
         return parent::getCustomEmojiStickers(Helpers::array_filter(['custom_emoji_ids' => $custom_emoji_ids]));
     }
@@ -993,7 +993,7 @@ trait MethodsTrait
      * Use this method to upload a file with a sticker for later use in the createNewStickerSet, addStickerToSet, or replaceStickerInSet methods (the file can be used multiple times).
      * Returns the uploaded File on success.
      */
-    public function uploadStickerFile($user_id = null, $sticker = null, $sticker_format = null): TelegramResponse
+    public function uploadStickerFile($user_id, $sticker, $sticker_format): TelegramResponse
     {
         return parent::uploadStickerFile(Helpers::array_filter(['user_id' => $user_id, 'sticker' => $sticker, 'sticker_format' => $sticker_format]));
     }
@@ -1003,7 +1003,7 @@ trait MethodsTrait
      * The bot will be able to edit the sticker set thus created.
      * Returns True on success.
      */
-    public function createNewStickerSet($user_id = null, $name = null, $title = null, $stickers = null, $sticker_type = null, $needs_repainting = null): TelegramResponse
+    public function createNewStickerSet($user_id, $name, $title, $stickers, $sticker_type = null, $needs_repainting = null): TelegramResponse
     {
         return parent::createNewStickerSet(Helpers::array_filter(['user_id' => $user_id, 'name' => $name, 'title' => $title, 'stickers' => $stickers, 'sticker_type' => $sticker_type, 'needs_repainting' => $needs_repainting]));
     }
@@ -1014,7 +1014,7 @@ trait MethodsTrait
      * Other sticker sets can have up to 120 stickers.
      * Returns True on success.
      */
-    public function addStickerToSet($user_id = null, $name = null, $sticker = null): TelegramResponse
+    public function addStickerToSet($user_id, $name, $sticker): TelegramResponse
     {
         return parent::addStickerToSet(Helpers::array_filter(['user_id' => $user_id, 'name' => $name, 'sticker' => $sticker]));
     }
@@ -1023,7 +1023,7 @@ trait MethodsTrait
      * Use this method to move a sticker in a set created by the bot to a specific position.
      * Returns True on success.
      */
-    public function setStickerPositionInSet($sticker = null, $position = null): TelegramResponse
+    public function setStickerPositionInSet($sticker, $position): TelegramResponse
     {
         return parent::setStickerPositionInSet(Helpers::array_filter(['sticker' => $sticker, 'position' => $position]));
     }
@@ -1032,7 +1032,7 @@ trait MethodsTrait
      * Use this method to delete a sticker from a set created by the bot.
      * Returns True on success.
      */
-    public function deleteStickerFromSet($sticker = null): TelegramResponse
+    public function deleteStickerFromSet($sticker): TelegramResponse
     {
         return parent::deleteStickerFromSet(Helpers::array_filter(['sticker' => $sticker]));
     }
@@ -1042,7 +1042,7 @@ trait MethodsTrait
      * The method is equivalent to calling deleteStickerFromSet, then addStickerToSet, then setStickerPositionInSet.
      * Returns True on success.
      */
-    public function replaceStickerInSet($user_id = null, $name = null, $old_sticker = null, $sticker = null): TelegramResponse
+    public function replaceStickerInSet($user_id, $name, $old_sticker, $sticker): TelegramResponse
     {
         return parent::replaceStickerInSet(Helpers::array_filter(['user_id' => $user_id, 'name' => $name, 'old_sticker' => $old_sticker, 'sticker' => $sticker]));
     }
@@ -1052,7 +1052,7 @@ trait MethodsTrait
      * The sticker must belong to a sticker set created by the bot.
      * Returns True on success.
      */
-    public function setStickerEmojiList($sticker = null, $emoji_list = null): TelegramResponse
+    public function setStickerEmojiList($sticker, $emoji_list): TelegramResponse
     {
         return parent::setStickerEmojiList(Helpers::array_filter(['sticker' => $sticker, 'emoji_list' => $emoji_list]));
     }
@@ -1062,7 +1062,7 @@ trait MethodsTrait
      * The sticker must belong to a sticker set created by the bot.
      * Returns True on success.
      */
-    public function setStickerKeywords($sticker = null, $keywords = null): TelegramResponse
+    public function setStickerKeywords($sticker, $keywords = null): TelegramResponse
     {
         return parent::setStickerKeywords(Helpers::array_filter(['sticker' => $sticker, 'keywords' => $keywords]));
     }
@@ -1072,7 +1072,7 @@ trait MethodsTrait
      * The sticker must belong to a sticker set that was created by the bot.
      * Returns True on success.
      */
-    public function setStickerMaskPosition($sticker = null, $mask_position = null): TelegramResponse
+    public function setStickerMaskPosition($sticker, $mask_position = null): TelegramResponse
     {
         return parent::setStickerMaskPosition(Helpers::array_filter(['sticker' => $sticker, 'mask_position' => $mask_position]));
     }
@@ -1081,7 +1081,7 @@ trait MethodsTrait
      * Use this method to set the title of a created sticker set.
      * Returns True on success.
      */
-    public function setStickerSetTitle($name = null, $title = null): TelegramResponse
+    public function setStickerSetTitle($name, $title): TelegramResponse
     {
         return parent::setStickerSetTitle(Helpers::array_filter(['name' => $name, 'title' => $title]));
     }
@@ -1091,16 +1091,16 @@ trait MethodsTrait
      * The format of the thumbnail file must match the format of the stickers in the set.
      * Returns True on success.
      */
-    public function setStickerSetThumbnail($name = null, $user_id = null, $thumbnail = null, $format = null): TelegramResponse
+    public function setStickerSetThumbnail($name, $user_id, $format, $thumbnail = null): TelegramResponse
     {
-        return parent::setStickerSetThumbnail(Helpers::array_filter(['name' => $name, 'user_id' => $user_id, 'thumbnail' => $thumbnail, 'format' => $format]));
+        return parent::setStickerSetThumbnail(Helpers::array_filter(['name' => $name, 'user_id' => $user_id, 'format' => $format, 'thumbnail' => $thumbnail]));
     }
 
     /**
      * Use this method to set the thumbnail of a custom emoji sticker set.
      * Returns True on success.
      */
-    public function setCustomEmojiStickerSetThumbnail($name = null, $custom_emoji_id = null): TelegramResponse
+    public function setCustomEmojiStickerSetThumbnail($name, $custom_emoji_id = null): TelegramResponse
     {
         return parent::setCustomEmojiStickerSetThumbnail(Helpers::array_filter(['name' => $name, 'custom_emoji_id' => $custom_emoji_id]));
     }
@@ -1109,7 +1109,7 @@ trait MethodsTrait
      * Use this method to delete a sticker set that was created by the bot.
      * Returns True on success.
      */
-    public function deleteStickerSet($name = null): TelegramResponse
+    public function deleteStickerSet($name): TelegramResponse
     {
         return parent::deleteStickerSet(Helpers::array_filter(['name' => $name]));
     }
@@ -1118,7 +1118,7 @@ trait MethodsTrait
      * Use this method to send answers to an inline query.
      * On success, True is returned.No more than 50 results per query are allowed.
      */
-    public function answerInlineQuery($inline_query_id = null, $results = null, $cache_time = null, $is_personal = null, $next_offset = null, $button = null): TelegramResponse
+    public function answerInlineQuery($inline_query_id, $results, $cache_time = null, $is_personal = null, $next_offset = null, $button = null): TelegramResponse
     {
         return parent::answerInlineQuery(Helpers::array_filter(['inline_query_id' => $inline_query_id, 'results' => $results, 'cache_time' => $cache_time, 'is_personal' => $is_personal, 'next_offset' => $next_offset, 'button' => $button]));
     }
@@ -1127,7 +1127,7 @@ trait MethodsTrait
      * Use this method to set the result of an interaction with a Web App and send a corresponding message on behalf of the user to the chat from which the query originated.
      * On success, a SentWebAppMessage object is returned.
      */
-    public function answerWebAppQuery($web_app_query_id = null, $result = null): TelegramResponse
+    public function answerWebAppQuery($web_app_query_id, $result): TelegramResponse
     {
         return parent::answerWebAppQuery(Helpers::array_filter(['web_app_query_id' => $web_app_query_id, 'result' => $result]));
     }
@@ -1136,18 +1136,18 @@ trait MethodsTrait
      * Use this method to send invoices.
      * On success, the sent Message is returned.
      */
-    public function sendInvoice($chat_id = null, $message_thread_id = null, $title = null, $description = null, $payload = null, $provider_token = null, $currency = null, $prices = null, $max_tip_amount = null, $suggested_tip_amounts = null, $start_parameter = null, $provider_data = null, $photo_url = null, $photo_size = null, $photo_width = null, $photo_height = null, $need_name = null, $need_phone_number = null, $need_email = null, $need_shipping_address = null, $send_phone_number_to_provider = null, $send_email_to_provider = null, $is_flexible = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendInvoice($chat_id, $title, $description, $payload, $currency, $prices, $message_thread_id = null, $provider_token = null, $max_tip_amount = null, $suggested_tip_amounts = null, $start_parameter = null, $provider_data = null, $photo_url = null, $photo_size = null, $photo_width = null, $photo_height = null, $need_name = null, $need_phone_number = null, $need_email = null, $need_shipping_address = null, $send_phone_number_to_provider = null, $send_email_to_provider = null, $is_flexible = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendInvoice(Helpers::array_filter(['chat_id' => $chat_id, 'message_thread_id' => $message_thread_id, 'title' => $title, 'description' => $description, 'payload' => $payload, 'provider_token' => $provider_token, 'currency' => $currency, 'prices' => $prices, 'max_tip_amount' => $max_tip_amount, 'suggested_tip_amounts' => $suggested_tip_amounts, 'start_parameter' => $start_parameter, 'provider_data' => $provider_data, 'photo_url' => $photo_url, 'photo_size' => $photo_size, 'photo_width' => $photo_width, 'photo_height' => $photo_height, 'need_name' => $need_name, 'need_phone_number' => $need_phone_number, 'need_email' => $need_email, 'need_shipping_address' => $need_shipping_address, 'send_phone_number_to_provider' => $send_phone_number_to_provider, 'send_email_to_provider' => $send_email_to_provider, 'is_flexible' => $is_flexible, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendInvoice(Helpers::array_filter(['chat_id' => $chat_id, 'title' => $title, 'description' => $description, 'payload' => $payload, 'currency' => $currency, 'prices' => $prices, 'message_thread_id' => $message_thread_id, 'provider_token' => $provider_token, 'max_tip_amount' => $max_tip_amount, 'suggested_tip_amounts' => $suggested_tip_amounts, 'start_parameter' => $start_parameter, 'provider_data' => $provider_data, 'photo_url' => $photo_url, 'photo_size' => $photo_size, 'photo_width' => $photo_width, 'photo_height' => $photo_height, 'need_name' => $need_name, 'need_phone_number' => $need_phone_number, 'need_email' => $need_email, 'need_shipping_address' => $need_shipping_address, 'send_phone_number_to_provider' => $send_phone_number_to_provider, 'send_email_to_provider' => $send_email_to_provider, 'is_flexible' => $is_flexible, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
      * Use this method to create a link for an invoice.
      * Returns the created invoice link as String on success.
      */
-    public function createInvoiceLink($title = null, $description = null, $payload = null, $provider_token = null, $currency = null, $prices = null, $max_tip_amount = null, $suggested_tip_amounts = null, $provider_data = null, $photo_url = null, $photo_size = null, $photo_width = null, $photo_height = null, $need_name = null, $need_phone_number = null, $need_email = null, $need_shipping_address = null, $send_phone_number_to_provider = null, $send_email_to_provider = null, $is_flexible = null): TelegramResponse
+    public function createInvoiceLink($title, $description, $payload, $currency, $prices, $provider_token = null, $max_tip_amount = null, $suggested_tip_amounts = null, $provider_data = null, $photo_url = null, $photo_size = null, $photo_width = null, $photo_height = null, $need_name = null, $need_phone_number = null, $need_email = null, $need_shipping_address = null, $send_phone_number_to_provider = null, $send_email_to_provider = null, $is_flexible = null): TelegramResponse
     {
-        return parent::createInvoiceLink(Helpers::array_filter(['title' => $title, 'description' => $description, 'payload' => $payload, 'provider_token' => $provider_token, 'currency' => $currency, 'prices' => $prices, 'max_tip_amount' => $max_tip_amount, 'suggested_tip_amounts' => $suggested_tip_amounts, 'provider_data' => $provider_data, 'photo_url' => $photo_url, 'photo_size' => $photo_size, 'photo_width' => $photo_width, 'photo_height' => $photo_height, 'need_name' => $need_name, 'need_phone_number' => $need_phone_number, 'need_email' => $need_email, 'need_shipping_address' => $need_shipping_address, 'send_phone_number_to_provider' => $send_phone_number_to_provider, 'send_email_to_provider' => $send_email_to_provider, 'is_flexible' => $is_flexible]));
+        return parent::createInvoiceLink(Helpers::array_filter(['title' => $title, 'description' => $description, 'payload' => $payload, 'currency' => $currency, 'prices' => $prices, 'provider_token' => $provider_token, 'max_tip_amount' => $max_tip_amount, 'suggested_tip_amounts' => $suggested_tip_amounts, 'provider_data' => $provider_data, 'photo_url' => $photo_url, 'photo_size' => $photo_size, 'photo_width' => $photo_width, 'photo_height' => $photo_height, 'need_name' => $need_name, 'need_phone_number' => $need_phone_number, 'need_email' => $need_email, 'need_shipping_address' => $need_shipping_address, 'send_phone_number_to_provider' => $send_phone_number_to_provider, 'send_email_to_provider' => $send_email_to_provider, 'is_flexible' => $is_flexible]));
     }
 
     /**
@@ -1155,7 +1155,7 @@ trait MethodsTrait
      * Use this method to reply to shipping queries.
      * On success, True is returned.
      */
-    public function answerShippingQuery($shipping_query_id = null, $ok = null, $shipping_options = null, $error_message = null): TelegramResponse
+    public function answerShippingQuery($shipping_query_id, $ok, $shipping_options = null, $error_message = null): TelegramResponse
     {
         return parent::answerShippingQuery(Helpers::array_filter(['shipping_query_id' => $shipping_query_id, 'ok' => $ok, 'shipping_options' => $shipping_options, 'error_message' => $error_message]));
     }
@@ -1166,7 +1166,7 @@ trait MethodsTrait
      * On success, True is returned.
      * Note: The Bot API must receive an answer within 10 seconds after the pre-checkout query was sent.
      */
-    public function answerPreCheckoutQuery($pre_checkout_query_id = null, $ok = null, $error_message = null): TelegramResponse
+    public function answerPreCheckoutQuery($pre_checkout_query_id, $ok, $error_message = null): TelegramResponse
     {
         return parent::answerPreCheckoutQuery(Helpers::array_filter(['pre_checkout_query_id' => $pre_checkout_query_id, 'ok' => $ok, 'error_message' => $error_message]));
     }
@@ -1184,7 +1184,7 @@ trait MethodsTrait
      * Refunds a successful payment in Telegram Stars.
      * Returns True on success.
      */
-    public function refundStarPayment($user_id = null, $telegram_payment_charge_id = null): TelegramResponse
+    public function refundStarPayment($user_id, $telegram_payment_charge_id): TelegramResponse
     {
         return parent::refundStarPayment(Helpers::array_filter(['user_id' => $user_id, 'telegram_payment_charge_id' => $telegram_payment_charge_id]));
     }
@@ -1203,9 +1203,9 @@ trait MethodsTrait
      * Use this method to send a game.
      * On success, the sent Message is returned.
      */
-    public function sendGame($business_connection_id = null, $chat_id = null, $message_thread_id = null, $game_short_name = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendGame($chat_id, $game_short_name, $business_connection_id = null, $message_thread_id = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendGame(Helpers::array_filter(['business_connection_id' => $business_connection_id, 'chat_id' => $chat_id, 'message_thread_id' => $message_thread_id, 'game_short_name' => $game_short_name, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendGame(Helpers::array_filter(['chat_id' => $chat_id, 'game_short_name' => $game_short_name, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
@@ -1213,7 +1213,7 @@ trait MethodsTrait
      * On success, if the message is not an inline message, the Message is returned, otherwise True is returned.
      * Returns an error, if the new score is not greater than the user's current score in the chat and force is False.
      */
-    public function setGameScore($user_id = null, $score = null, $force = null, $disable_edit_message = null, $chat_id = null, $message_id = null, $inline_message_id = null): TelegramResponse
+    public function setGameScore($user_id, $score, $force = null, $disable_edit_message = null, $chat_id = null, $message_id = null, $inline_message_id = null): TelegramResponse
     {
         return parent::setGameScore(Helpers::array_filter(['user_id' => $user_id, 'score' => $score, 'force' => $force, 'disable_edit_message' => $disable_edit_message, 'chat_id' => $chat_id, 'message_id' => $message_id, 'inline_message_id' => $inline_message_id]));
     }
