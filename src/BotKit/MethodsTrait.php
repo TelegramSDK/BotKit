@@ -49,9 +49,9 @@ trait MethodsTrait
      * Use this method to send text messages.
      * On success, the sent Message is returned.
      */
-    public function sendMessage($chat_id, $text, $business_connection_id = null, $message_thread_id = null, $parse_mode = null, $entities = null, $link_preview_options = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendMessage($chat_id, $text, $business_connection_id = null, $message_thread_id = null, $parse_mode = null, $entities = null, $link_preview_options = null, $disable_notification = null, $protect_content = null, $allow_paid_broadcast = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendMessage(Helpers::array_filter(['chat_id' => $chat_id, 'text' => $text, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'parse_mode' => $parse_mode, 'entities' => $entities, 'link_preview_options' => $link_preview_options, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendMessage(Helpers::array_filter(['chat_id' => $chat_id, 'text' => $text, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'parse_mode' => $parse_mode, 'entities' => $entities, 'link_preview_options' => $link_preview_options, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'allow_paid_broadcast' => $allow_paid_broadcast, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
@@ -83,9 +83,9 @@ trait MethodsTrait
      * The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message.
      * Returns the MessageId of the sent message on success.
      */
-    public function copyMessage($chat_id, $from_chat_id, $message_id, $message_thread_id = null, $caption = null, $parse_mode = null, $caption_entities = null, $show_caption_above_media = null, $disable_notification = null, $protect_content = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function copyMessage($chat_id, $from_chat_id, $message_id, $message_thread_id = null, $caption = null, $parse_mode = null, $caption_entities = null, $show_caption_above_media = null, $disable_notification = null, $protect_content = null, $allow_paid_broadcast = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::copyMessage(Helpers::array_filter(['chat_id' => $chat_id, 'from_chat_id' => $from_chat_id, 'message_id' => $message_id, 'message_thread_id' => $message_thread_id, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'show_caption_above_media' => $show_caption_above_media, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::copyMessage(Helpers::array_filter(['chat_id' => $chat_id, 'from_chat_id' => $from_chat_id, 'message_id' => $message_id, 'message_thread_id' => $message_thread_id, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'show_caption_above_media' => $show_caption_above_media, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'allow_paid_broadcast' => $allow_paid_broadcast, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
@@ -106,9 +106,9 @@ trait MethodsTrait
      * Use this method to send photos.
      * On success, the sent Message is returned.
      */
-    public function sendPhoto($chat_id, $photo, $business_connection_id = null, $message_thread_id = null, $caption = null, $parse_mode = null, $caption_entities = null, $show_caption_above_media = null, $has_spoiler = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendPhoto($chat_id, $photo, $business_connection_id = null, $message_thread_id = null, $caption = null, $parse_mode = null, $caption_entities = null, $show_caption_above_media = null, $has_spoiler = null, $disable_notification = null, $protect_content = null, $allow_paid_broadcast = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendPhoto(Helpers::array_filter(['chat_id' => $chat_id, 'photo' => $photo, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'show_caption_above_media' => $show_caption_above_media, 'has_spoiler' => $has_spoiler, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendPhoto(Helpers::array_filter(['chat_id' => $chat_id, 'photo' => $photo, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'show_caption_above_media' => $show_caption_above_media, 'has_spoiler' => $has_spoiler, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'allow_paid_broadcast' => $allow_paid_broadcast, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
@@ -127,9 +127,9 @@ trait MethodsTrait
      * On success, the sent Message is returned.
      * Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
      */
-    public function sendDocument($chat_id, $document, $business_connection_id = null, $message_thread_id = null, $thumbnail = null, $caption = null, $parse_mode = null, $caption_entities = null, $disable_content_type_detection = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendDocument($chat_id, $document, $business_connection_id = null, $message_thread_id = null, $thumbnail = null, $caption = null, $parse_mode = null, $caption_entities = null, $disable_content_type_detection = null, $disable_notification = null, $protect_content = null, $allow_paid_broadcast = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendDocument(Helpers::array_filter(['chat_id' => $chat_id, 'document' => $document, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'thumbnail' => $thumbnail, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'disable_content_type_detection' => $disable_content_type_detection, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendDocument(Helpers::array_filter(['chat_id' => $chat_id, 'document' => $document, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'thumbnail' => $thumbnail, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'disable_content_type_detection' => $disable_content_type_detection, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'allow_paid_broadcast' => $allow_paid_broadcast, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
@@ -137,9 +137,9 @@ trait MethodsTrait
      * On success, the sent Message is returned.
      * Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
      */
-    public function sendVideo($chat_id, $video, $business_connection_id = null, $message_thread_id = null, $duration = null, $width = null, $height = null, $thumbnail = null, $caption = null, $parse_mode = null, $caption_entities = null, $show_caption_above_media = null, $has_spoiler = null, $supports_streaming = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendVideo($chat_id, $video, $business_connection_id = null, $message_thread_id = null, $duration = null, $width = null, $height = null, $thumbnail = null, $caption = null, $parse_mode = null, $caption_entities = null, $show_caption_above_media = null, $has_spoiler = null, $supports_streaming = null, $disable_notification = null, $protect_content = null, $allow_paid_broadcast = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendVideo(Helpers::array_filter(['chat_id' => $chat_id, 'video' => $video, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'duration' => $duration, 'width' => $width, 'height' => $height, 'thumbnail' => $thumbnail, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'show_caption_above_media' => $show_caption_above_media, 'has_spoiler' => $has_spoiler, 'supports_streaming' => $supports_streaming, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendVideo(Helpers::array_filter(['chat_id' => $chat_id, 'video' => $video, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'duration' => $duration, 'width' => $width, 'height' => $height, 'thumbnail' => $thumbnail, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'show_caption_above_media' => $show_caption_above_media, 'has_spoiler' => $has_spoiler, 'supports_streaming' => $supports_streaming, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'allow_paid_broadcast' => $allow_paid_broadcast, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
@@ -147,9 +147,9 @@ trait MethodsTrait
      * On success, the sent Message is returned.
      * Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
      */
-    public function sendAnimation($chat_id, $animation, $business_connection_id = null, $message_thread_id = null, $duration = null, $width = null, $height = null, $thumbnail = null, $caption = null, $parse_mode = null, $caption_entities = null, $show_caption_above_media = null, $has_spoiler = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendAnimation($chat_id, $animation, $business_connection_id = null, $message_thread_id = null, $duration = null, $width = null, $height = null, $thumbnail = null, $caption = null, $parse_mode = null, $caption_entities = null, $show_caption_above_media = null, $has_spoiler = null, $disable_notification = null, $protect_content = null, $allow_paid_broadcast = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendAnimation(Helpers::array_filter(['chat_id' => $chat_id, 'animation' => $animation, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'duration' => $duration, 'width' => $width, 'height' => $height, 'thumbnail' => $thumbnail, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'show_caption_above_media' => $show_caption_above_media, 'has_spoiler' => $has_spoiler, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendAnimation(Helpers::array_filter(['chat_id' => $chat_id, 'animation' => $animation, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'duration' => $duration, 'width' => $width, 'height' => $height, 'thumbnail' => $thumbnail, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'show_caption_above_media' => $show_caption_above_media, 'has_spoiler' => $has_spoiler, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'allow_paid_broadcast' => $allow_paid_broadcast, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
@@ -158,9 +158,9 @@ trait MethodsTrait
      * On success, the sent Message is returned.
      * Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
      */
-    public function sendVoice($chat_id, $voice, $business_connection_id = null, $message_thread_id = null, $caption = null, $parse_mode = null, $caption_entities = null, $duration = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendVoice($chat_id, $voice, $business_connection_id = null, $message_thread_id = null, $caption = null, $parse_mode = null, $caption_entities = null, $duration = null, $disable_notification = null, $protect_content = null, $allow_paid_broadcast = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendVoice(Helpers::array_filter(['chat_id' => $chat_id, 'voice' => $voice, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'duration' => $duration, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendVoice(Helpers::array_filter(['chat_id' => $chat_id, 'voice' => $voice, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'duration' => $duration, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'allow_paid_broadcast' => $allow_paid_broadcast, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
@@ -168,18 +168,18 @@ trait MethodsTrait
      * Use this method to send video messages.
      * On success, the sent Message is returned.
      */
-    public function sendVideoNote($chat_id, $video_note, $business_connection_id = null, $message_thread_id = null, $duration = null, $length = null, $thumbnail = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendVideoNote($chat_id, $video_note, $business_connection_id = null, $message_thread_id = null, $duration = null, $length = null, $thumbnail = null, $disable_notification = null, $protect_content = null, $allow_paid_broadcast = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendVideoNote(Helpers::array_filter(['chat_id' => $chat_id, 'video_note' => $video_note, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'duration' => $duration, 'length' => $length, 'thumbnail' => $thumbnail, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendVideoNote(Helpers::array_filter(['chat_id' => $chat_id, 'video_note' => $video_note, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'duration' => $duration, 'length' => $length, 'thumbnail' => $thumbnail, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'allow_paid_broadcast' => $allow_paid_broadcast, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
      * Use this method to send paid media.
      * On success, the sent Message is returned.
      */
-    public function sendPaidMedia($chat_id, $star_count, $media, $business_connection_id = null, $payload = null, $caption = null, $parse_mode = null, $caption_entities = null, $show_caption_above_media = null, $disable_notification = null, $protect_content = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendPaidMedia($chat_id, $star_count, $media, $business_connection_id = null, $payload = null, $caption = null, $parse_mode = null, $caption_entities = null, $show_caption_above_media = null, $disable_notification = null, $protect_content = null, $allow_paid_broadcast = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendPaidMedia(Helpers::array_filter(['chat_id' => $chat_id, 'star_count' => $star_count, 'media' => $media, 'business_connection_id' => $business_connection_id, 'payload' => $payload, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'show_caption_above_media' => $show_caption_above_media, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendPaidMedia(Helpers::array_filter(['chat_id' => $chat_id, 'star_count' => $star_count, 'media' => $media, 'business_connection_id' => $business_connection_id, 'payload' => $payload, 'caption' => $caption, 'parse_mode' => $parse_mode, 'caption_entities' => $caption_entities, 'show_caption_above_media' => $show_caption_above_media, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'allow_paid_broadcast' => $allow_paid_broadcast, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
@@ -187,54 +187,54 @@ trait MethodsTrait
      * Documents and audio files can be only grouped in an album with messages of the same type.
      * On success, an array of Messages that were sent is returned.
      */
-    public function sendMediaGroup($chat_id, $media, $business_connection_id = null, $message_thread_id = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null): TelegramResponse
+    public function sendMediaGroup($chat_id, $media, $business_connection_id = null, $message_thread_id = null, $disable_notification = null, $protect_content = null, $allow_paid_broadcast = null, $message_effect_id = null, $reply_parameters = null): TelegramResponse
     {
-        return parent::sendMediaGroup(Helpers::array_filter(['chat_id' => $chat_id, 'media' => $media, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters]));
+        return parent::sendMediaGroup(Helpers::array_filter(['chat_id' => $chat_id, 'media' => $media, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'allow_paid_broadcast' => $allow_paid_broadcast, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters]));
     }
 
     /**
      * Use this method to send point on the map.
      * On success, the sent Message is returned.
      */
-    public function sendLocation($chat_id, $latitude, $longitude, $business_connection_id = null, $message_thread_id = null, $horizontal_accuracy = null, $live_period = null, $heading = null, $proximity_alert_radius = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendLocation($chat_id, $latitude, $longitude, $business_connection_id = null, $message_thread_id = null, $horizontal_accuracy = null, $live_period = null, $heading = null, $proximity_alert_radius = null, $disable_notification = null, $protect_content = null, $allow_paid_broadcast = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendLocation(Helpers::array_filter(['chat_id' => $chat_id, 'latitude' => $latitude, 'longitude' => $longitude, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'horizontal_accuracy' => $horizontal_accuracy, 'live_period' => $live_period, 'heading' => $heading, 'proximity_alert_radius' => $proximity_alert_radius, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendLocation(Helpers::array_filter(['chat_id' => $chat_id, 'latitude' => $latitude, 'longitude' => $longitude, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'horizontal_accuracy' => $horizontal_accuracy, 'live_period' => $live_period, 'heading' => $heading, 'proximity_alert_radius' => $proximity_alert_radius, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'allow_paid_broadcast' => $allow_paid_broadcast, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
      * Use this method to send information about a venue.
      * On success, the sent Message is returned.
      */
-    public function sendVenue($chat_id, $latitude, $longitude, $title, $address, $business_connection_id = null, $message_thread_id = null, $foursquare_id = null, $foursquare_type = null, $google_place_id = null, $google_place_type = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendVenue($chat_id, $latitude, $longitude, $title, $address, $business_connection_id = null, $message_thread_id = null, $foursquare_id = null, $foursquare_type = null, $google_place_id = null, $google_place_type = null, $disable_notification = null, $protect_content = null, $allow_paid_broadcast = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendVenue(Helpers::array_filter(['chat_id' => $chat_id, 'latitude' => $latitude, 'longitude' => $longitude, 'title' => $title, 'address' => $address, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'foursquare_id' => $foursquare_id, 'foursquare_type' => $foursquare_type, 'google_place_id' => $google_place_id, 'google_place_type' => $google_place_type, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendVenue(Helpers::array_filter(['chat_id' => $chat_id, 'latitude' => $latitude, 'longitude' => $longitude, 'title' => $title, 'address' => $address, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'foursquare_id' => $foursquare_id, 'foursquare_type' => $foursquare_type, 'google_place_id' => $google_place_id, 'google_place_type' => $google_place_type, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'allow_paid_broadcast' => $allow_paid_broadcast, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
      * Use this method to send phone contacts.
      * On success, the sent Message is returned.
      */
-    public function sendContact($chat_id, $phone_number, $first_name, $business_connection_id = null, $message_thread_id = null, $last_name = null, $vcard = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendContact($chat_id, $phone_number, $first_name, $business_connection_id = null, $message_thread_id = null, $last_name = null, $vcard = null, $disable_notification = null, $protect_content = null, $allow_paid_broadcast = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendContact(Helpers::array_filter(['chat_id' => $chat_id, 'phone_number' => $phone_number, 'first_name' => $first_name, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'last_name' => $last_name, 'vcard' => $vcard, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendContact(Helpers::array_filter(['chat_id' => $chat_id, 'phone_number' => $phone_number, 'first_name' => $first_name, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'last_name' => $last_name, 'vcard' => $vcard, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'allow_paid_broadcast' => $allow_paid_broadcast, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
      * Use this method to send a native poll.
      * On success, the sent Message is returned.
      */
-    public function sendPoll($chat_id, $question, $options, $business_connection_id = null, $message_thread_id = null, $question_parse_mode = null, $question_entities = null, $is_anonymous = null, $type = null, $allows_multiple_answers = null, $correct_option_id = null, $explanation = null, $explanation_parse_mode = null, $explanation_entities = null, $open_period = null, $close_date = null, $is_closed = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendPoll($chat_id, $question, $options, $business_connection_id = null, $message_thread_id = null, $question_parse_mode = null, $question_entities = null, $is_anonymous = null, $type = null, $allows_multiple_answers = null, $correct_option_id = null, $explanation = null, $explanation_parse_mode = null, $explanation_entities = null, $open_period = null, $close_date = null, $is_closed = null, $disable_notification = null, $protect_content = null, $allow_paid_broadcast = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendPoll(Helpers::array_filter(['chat_id' => $chat_id, 'question' => $question, 'options' => $options, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'question_parse_mode' => $question_parse_mode, 'question_entities' => $question_entities, 'is_anonymous' => $is_anonymous, 'type' => $type, 'allows_multiple_answers' => $allows_multiple_answers, 'correct_option_id' => $correct_option_id, 'explanation' => $explanation, 'explanation_parse_mode' => $explanation_parse_mode, 'explanation_entities' => $explanation_entities, 'open_period' => $open_period, 'close_date' => $close_date, 'is_closed' => $is_closed, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendPoll(Helpers::array_filter(['chat_id' => $chat_id, 'question' => $question, 'options' => $options, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'question_parse_mode' => $question_parse_mode, 'question_entities' => $question_entities, 'is_anonymous' => $is_anonymous, 'type' => $type, 'allows_multiple_answers' => $allows_multiple_answers, 'correct_option_id' => $correct_option_id, 'explanation' => $explanation, 'explanation_parse_mode' => $explanation_parse_mode, 'explanation_entities' => $explanation_entities, 'open_period' => $open_period, 'close_date' => $close_date, 'is_closed' => $is_closed, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'allow_paid_broadcast' => $allow_paid_broadcast, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
      * Use this method to send an animated emoji that will display a random value.
      * On success, the sent Message is returned.
      */
-    public function sendDice($chat_id, $business_connection_id = null, $message_thread_id = null, $emoji = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendDice($chat_id, $business_connection_id = null, $message_thread_id = null, $emoji = null, $disable_notification = null, $protect_content = null, $allow_paid_broadcast = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendDice(Helpers::array_filter(['chat_id' => $chat_id, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'emoji' => $emoji, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendDice(Helpers::array_filter(['chat_id' => $chat_id, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'emoji' => $emoji, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'allow_paid_broadcast' => $allow_paid_broadcast, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
@@ -895,7 +895,7 @@ trait MethodsTrait
     }
 
     /**
-     * Use this method to edit animation, audio, document, photo, or video messages.
+     * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages.
      * If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise.
      * When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file_id or specify a URL.
      * On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
@@ -966,9 +966,9 @@ trait MethodsTrait
      * Use this method to send static .WEBP, animated .TGS, or video .WEBM stickers.
      * On success, the sent Message is returned.
      */
-    public function sendSticker($chat_id, $sticker, $business_connection_id = null, $message_thread_id = null, $emoji = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendSticker($chat_id, $sticker, $business_connection_id = null, $message_thread_id = null, $emoji = null, $disable_notification = null, $protect_content = null, $allow_paid_broadcast = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendSticker(Helpers::array_filter(['chat_id' => $chat_id, 'sticker' => $sticker, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'emoji' => $emoji, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendSticker(Helpers::array_filter(['chat_id' => $chat_id, 'sticker' => $sticker, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'emoji' => $emoji, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'allow_paid_broadcast' => $allow_paid_broadcast, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
@@ -1136,9 +1136,9 @@ trait MethodsTrait
      * Use this method to send invoices.
      * On success, the sent Message is returned.
      */
-    public function sendInvoice($chat_id, $title, $description, $payload, $currency, $prices, $message_thread_id = null, $provider_token = null, $max_tip_amount = null, $suggested_tip_amounts = null, $start_parameter = null, $provider_data = null, $photo_url = null, $photo_size = null, $photo_width = null, $photo_height = null, $need_name = null, $need_phone_number = null, $need_email = null, $need_shipping_address = null, $send_phone_number_to_provider = null, $send_email_to_provider = null, $is_flexible = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendInvoice($chat_id, $title, $description, $payload, $currency, $prices, $message_thread_id = null, $provider_token = null, $max_tip_amount = null, $suggested_tip_amounts = null, $start_parameter = null, $provider_data = null, $photo_url = null, $photo_size = null, $photo_width = null, $photo_height = null, $need_name = null, $need_phone_number = null, $need_email = null, $need_shipping_address = null, $send_phone_number_to_provider = null, $send_email_to_provider = null, $is_flexible = null, $disable_notification = null, $protect_content = null, $allow_paid_broadcast = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendInvoice(Helpers::array_filter(['chat_id' => $chat_id, 'title' => $title, 'description' => $description, 'payload' => $payload, 'currency' => $currency, 'prices' => $prices, 'message_thread_id' => $message_thread_id, 'provider_token' => $provider_token, 'max_tip_amount' => $max_tip_amount, 'suggested_tip_amounts' => $suggested_tip_amounts, 'start_parameter' => $start_parameter, 'provider_data' => $provider_data, 'photo_url' => $photo_url, 'photo_size' => $photo_size, 'photo_width' => $photo_width, 'photo_height' => $photo_height, 'need_name' => $need_name, 'need_phone_number' => $need_phone_number, 'need_email' => $need_email, 'need_shipping_address' => $need_shipping_address, 'send_phone_number_to_provider' => $send_phone_number_to_provider, 'send_email_to_provider' => $send_email_to_provider, 'is_flexible' => $is_flexible, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendInvoice(Helpers::array_filter(['chat_id' => $chat_id, 'title' => $title, 'description' => $description, 'payload' => $payload, 'currency' => $currency, 'prices' => $prices, 'message_thread_id' => $message_thread_id, 'provider_token' => $provider_token, 'max_tip_amount' => $max_tip_amount, 'suggested_tip_amounts' => $suggested_tip_amounts, 'start_parameter' => $start_parameter, 'provider_data' => $provider_data, 'photo_url' => $photo_url, 'photo_size' => $photo_size, 'photo_width' => $photo_width, 'photo_height' => $photo_height, 'need_name' => $need_name, 'need_phone_number' => $need_phone_number, 'need_email' => $need_email, 'need_shipping_address' => $need_shipping_address, 'send_phone_number_to_provider' => $send_phone_number_to_provider, 'send_email_to_provider' => $send_email_to_provider, 'is_flexible' => $is_flexible, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'allow_paid_broadcast' => $allow_paid_broadcast, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
@@ -1203,9 +1203,9 @@ trait MethodsTrait
      * Use this method to send a game.
      * On success, the sent Message is returned.
      */
-    public function sendGame($chat_id, $game_short_name, $business_connection_id = null, $message_thread_id = null, $disable_notification = null, $protect_content = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
+    public function sendGame($chat_id, $game_short_name, $business_connection_id = null, $message_thread_id = null, $disable_notification = null, $protect_content = null, $allow_paid_broadcast = null, $message_effect_id = null, $reply_parameters = null, $reply_markup = null): TelegramResponse
     {
-        return parent::sendGame(Helpers::array_filter(['chat_id' => $chat_id, 'game_short_name' => $game_short_name, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
+        return parent::sendGame(Helpers::array_filter(['chat_id' => $chat_id, 'game_short_name' => $game_short_name, 'business_connection_id' => $business_connection_id, 'message_thread_id' => $message_thread_id, 'disable_notification' => $disable_notification, 'protect_content' => $protect_content, 'allow_paid_broadcast' => $allow_paid_broadcast, 'message_effect_id' => $message_effect_id, 'reply_parameters' => $reply_parameters, 'reply_markup' => $reply_markup]));
     }
 
     /**
