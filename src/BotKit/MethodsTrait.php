@@ -269,6 +269,15 @@ trait MethodsTrait
     }
 
     /**
+     * Changes the emoji status for a given user that previously allowed the bot to manage their emoji status via the Mini App method requestEmojiStatusAccess.
+     * Returns True on success.
+     */
+    public function setUserEmojiStatus($user_id, $emoji_status_custom_emoji_id = null, $emoji_status_expiration_date = null): TelegramResponse
+    {
+        return parent::setUserEmojiStatus(Helpers::array_filter(['user_id' => $user_id, 'emoji_status_custom_emoji_id' => $emoji_status_custom_emoji_id, 'emoji_status_expiration_date' => $emoji_status_expiration_date]));
+    }
+
+    /**
      * Use this method to get basic information about a file and prepare it for downloading.
      * For the moment, bots can download files of up to 20MB in size.
      * On success, a File object is returned.
@@ -1115,6 +1124,26 @@ trait MethodsTrait
     }
 
     /**
+     * Returns the list of gifts that can be sent by the bot to users.
+     * Requires no parameters.
+     * Returns a Gifts object.
+     */
+    public function getAvailableGifts(): TelegramResponse
+    {
+        return parent::getAvailableGifts(Helpers::array_filter([]));
+    }
+
+    /**
+     * Sends a gift to the given user.
+     * The gift can't be converted to Telegram Stars by the user.
+     * Returns True on success.
+     */
+    public function sendGift($user_id, $gift_id, $text = null, $text_parse_mode = null, $text_entities = null): TelegramResponse
+    {
+        return parent::sendGift(Helpers::array_filter(['user_id' => $user_id, 'gift_id' => $gift_id, 'text' => $text, 'text_parse_mode' => $text_parse_mode, 'text_entities' => $text_entities]));
+    }
+
+    /**
      * Use this method to send answers to an inline query.
      * On success, True is returned.No more than 50 results per query are allowed.
      */
@@ -1133,6 +1162,15 @@ trait MethodsTrait
     }
 
     /**
+     * Stores a message that can be sent by a user of a Mini App.
+     * Returns a PreparedInlineMessage object.
+     */
+    public function savePreparedInlineMessage($user_id, $result, $allow_user_chats = null, $allow_bot_chats = null, $allow_group_chats = null, $allow_channel_chats = null): TelegramResponse
+    {
+        return parent::savePreparedInlineMessage(Helpers::array_filter(['user_id' => $user_id, 'result' => $result, 'allow_user_chats' => $allow_user_chats, 'allow_bot_chats' => $allow_bot_chats, 'allow_group_chats' => $allow_group_chats, 'allow_channel_chats' => $allow_channel_chats]));
+    }
+
+    /**
      * Use this method to send invoices.
      * On success, the sent Message is returned.
      */
@@ -1145,9 +1183,9 @@ trait MethodsTrait
      * Use this method to create a link for an invoice.
      * Returns the created invoice link as String on success.
      */
-    public function createInvoiceLink($title, $description, $payload, $currency, $prices, $provider_token = null, $max_tip_amount = null, $suggested_tip_amounts = null, $provider_data = null, $photo_url = null, $photo_size = null, $photo_width = null, $photo_height = null, $need_name = null, $need_phone_number = null, $need_email = null, $need_shipping_address = null, $send_phone_number_to_provider = null, $send_email_to_provider = null, $is_flexible = null): TelegramResponse
+    public function createInvoiceLink($title, $description, $payload, $currency, $prices, $business_connection_id = null, $provider_token = null, $subscription_period = null, $max_tip_amount = null, $suggested_tip_amounts = null, $provider_data = null, $photo_url = null, $photo_size = null, $photo_width = null, $photo_height = null, $need_name = null, $need_phone_number = null, $need_email = null, $need_shipping_address = null, $send_phone_number_to_provider = null, $send_email_to_provider = null, $is_flexible = null): TelegramResponse
     {
-        return parent::createInvoiceLink(Helpers::array_filter(['title' => $title, 'description' => $description, 'payload' => $payload, 'currency' => $currency, 'prices' => $prices, 'provider_token' => $provider_token, 'max_tip_amount' => $max_tip_amount, 'suggested_tip_amounts' => $suggested_tip_amounts, 'provider_data' => $provider_data, 'photo_url' => $photo_url, 'photo_size' => $photo_size, 'photo_width' => $photo_width, 'photo_height' => $photo_height, 'need_name' => $need_name, 'need_phone_number' => $need_phone_number, 'need_email' => $need_email, 'need_shipping_address' => $need_shipping_address, 'send_phone_number_to_provider' => $send_phone_number_to_provider, 'send_email_to_provider' => $send_email_to_provider, 'is_flexible' => $is_flexible]));
+        return parent::createInvoiceLink(Helpers::array_filter(['title' => $title, 'description' => $description, 'payload' => $payload, 'currency' => $currency, 'prices' => $prices, 'business_connection_id' => $business_connection_id, 'provider_token' => $provider_token, 'subscription_period' => $subscription_period, 'max_tip_amount' => $max_tip_amount, 'suggested_tip_amounts' => $suggested_tip_amounts, 'provider_data' => $provider_data, 'photo_url' => $photo_url, 'photo_size' => $photo_size, 'photo_width' => $photo_width, 'photo_height' => $photo_height, 'need_name' => $need_name, 'need_phone_number' => $need_phone_number, 'need_email' => $need_email, 'need_shipping_address' => $need_shipping_address, 'send_phone_number_to_provider' => $send_phone_number_to_provider, 'send_email_to_provider' => $send_email_to_provider, 'is_flexible' => $is_flexible]));
     }
 
     /**
@@ -1187,6 +1225,15 @@ trait MethodsTrait
     public function refundStarPayment($user_id, $telegram_payment_charge_id): TelegramResponse
     {
         return parent::refundStarPayment(Helpers::array_filter(['user_id' => $user_id, 'telegram_payment_charge_id' => $telegram_payment_charge_id]));
+    }
+
+    /**
+     * Allows the bot to cancel or re-enable extension of a subscription paid in Telegram Stars.
+     * Returns True on success.
+     */
+    public function editUserStarSubscription($user_id, $telegram_payment_charge_id, $is_canceled): TelegramResponse
+    {
+        return parent::editUserStarSubscription(Helpers::array_filter(['user_id' => $user_id, 'telegram_payment_charge_id' => $telegram_payment_charge_id, 'is_canceled' => $is_canceled]));
     }
 
     /**
