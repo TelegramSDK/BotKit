@@ -1138,9 +1138,45 @@ trait MethodsTrait
      * The gift can't be converted to Telegram Stars by the user.
      * Returns True on success.
      */
-    public function sendGift($user_id, $gift_id, $text = null, $text_parse_mode = null, $text_entities = null): TelegramResponse
+    public function sendGift($user_id, $gift_id, $pay_for_upgrade = null, $text = null, $text_parse_mode = null, $text_entities = null): TelegramResponse
     {
-        return parent::sendGift(Helpers::array_filter(['user_id' => $user_id, 'gift_id' => $gift_id, 'text' => $text, 'text_parse_mode' => $text_parse_mode, 'text_entities' => $text_entities]));
+        return parent::sendGift(Helpers::array_filter(['user_id' => $user_id, 'gift_id' => $gift_id, 'pay_for_upgrade' => $pay_for_upgrade, 'text' => $text, 'text_parse_mode' => $text_parse_mode, 'text_entities' => $text_entities]));
+    }
+
+    /**
+     * Verifies a user on behalf of the organization which is represented by the bot.
+     * Returns True on success.
+     */
+    public function verifyUser($user_id, $custom_description = null): TelegramResponse
+    {
+        return parent::verifyUser(Helpers::array_filter(['user_id' => $user_id, 'custom_description' => $custom_description]));
+    }
+
+    /**
+     * Verifies a chat on behalf of the organization which is represented by the bot.
+     * Returns True on success.
+     */
+    public function verifyChat($chat_id, $custom_description = null): TelegramResponse
+    {
+        return parent::verifyChat(Helpers::array_filter(['chat_id' => $chat_id, 'custom_description' => $custom_description]));
+    }
+
+    /**
+     * Removes verification from a user who is currently verified on behalf of the organization represented by the bot.
+     * Returns True on success.
+     */
+    public function removeUserVerification($user_id): TelegramResponse
+    {
+        return parent::removeUserVerification(Helpers::array_filter(['user_id' => $user_id]));
+    }
+
+    /**
+     * Removes verification from a chat that is currently verified on behalf of the organization represented by the bot.
+     * Returns True on success.
+     */
+    public function removeChatVerification($chat_id): TelegramResponse
+    {
+        return parent::removeChatVerification(Helpers::array_filter(['chat_id' => $chat_id]));
     }
 
     /**
